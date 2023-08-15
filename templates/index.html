@@ -6,13 +6,14 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
     <script src="{{ url_for('static', filename='js/flexible.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </head>
 <body>
 <div>
-    <div>
+    <div id="startSection">
         <form id="form1" onsubmit="return false" action="##" method="post">
-            <label>数字个数：<input name="num" type="text" id="num" size="15" value=""/></label>
-            <label>猜测次数：<input name="times" type="text" id="times" size="16" value=""/></label>
+            <label>数字个数：<input name="num" type="text" id="num" size="15" value="4"/></label>
+            <label>猜测次数：<input name="times" type="text" id="times" size="16" value="8"/></label>
             <label><input type="button" value="开始游戏" onclick="setGame()"></label>
         </form>
         <script type="text/javascript">
@@ -22,23 +23,30 @@
                     type: "POST",//方法类型
                     dataType: "json",//预期服务器返回的数据类型
                     data: $('#form1').serialize(),
-                    success: function (result) {
-                        alert(result);
+                    success: function (response) {
+                        game_status = response['status']
+                        if (game_status == 0) {
+                        startGame(response['_num'], response['_times']);
+                        }
+                        else if (game_status == 1) {
+                            alert(response['message'])
+                        }
+                        else if (game_status == 2) {
+                            alert(response['message'])
+                        }
+                        else if (game_status == 3) {
+                            alert(response['message'])
+                        }
+                        else {
+                            alert('系统错误！')
+                        }
                     },
                     error: function () {
-                        alert("异常！");
+                        alert("游戏启动失败，请刷新后重试");
                     }
                 });
             }
         </script>
-    </div>
-    <div>
-        <div>
-
-        </div>
-        <div>
-
-        </div>
     </div>
 </div>
 </body>

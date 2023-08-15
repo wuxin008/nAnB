@@ -5,3 +5,9 @@ body {
   color: #333333;
   background-color: #ffffff;
 }
+
+table {
+  align: center;
+  border: #A5D6D9;
+  width: 2px;
+}
