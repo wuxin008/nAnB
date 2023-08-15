@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>nAnB</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <script src="{{ url_for('static', filename='js/flexible.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+</head>
+<body>
+<div>
+    <div>
+        <form id="form1" onsubmit="return false" action="##" method="post">
+            <label>数字个数：<input name="num" type="text" id="num" size="15" value=""/></label>
+            <label>猜测次数：<input name="times" type="text" id="times" size="16" value=""/></label>
+            <label><input type="button" value="开始游戏" onclick="setGame()"></label>
+        </form>
+        <script type="text/javascript">
+            function setGame() {
+                $.ajax({
+                    url: '/setGame',
+                    type: "POST",//方法类型
+                    dataType: "json",//预期服务器返回的数据类型
+                    data: $('#form1').serialize(),
+                    success: function (result) {
+                        alert(result);
+                    },
+                    error: function () {
+                        alert("异常！");
+                    }
+                });
+            }
+        </script>
+    </div>
+    <div>
+        <div>
+
+        </div>
+        <div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
